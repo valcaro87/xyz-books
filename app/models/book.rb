@@ -27,6 +27,7 @@ class Book < ApplicationRecord
   def valid_isbn_10
     result = []
     isbn = self.isbn
+    isbn13  = isbn
     result << (isbn.count("/[^0-9]/i") < 9 ? false : true)
     sum = 0
     isbn = isbn.gsub(/[^0-9a-z ]/i, '').split("")
@@ -47,7 +48,12 @@ class Book < ApplicationRecord
     # p result.all? && sum % 11 == 0
 
     if !(result.all? && sum % 11 == 0)
-      errors.add(:isbn, "Please provide correct ISBN")
+      # try to check for isbn 13
+      if ISBN.valid?(isbn13)
+        true
+      else
+        errors.add(:isbn, "Please provide correct ISBN")
+      end
     end
   end
 
