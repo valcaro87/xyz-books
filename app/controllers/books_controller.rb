@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
     @publishers = Publisher.pluck(:name, :id)
-    @authors = Author.all_lists
+    @authors = Author.all
   end
 
   # GET /books/1/edit
@@ -23,12 +23,15 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @publishers = Publisher.pluck(:name, :id)
-    @authors = Author.all_lists
-    
-    book_authors = @book.book_authors.new(book_id: @book.id, author_id: params[:book_authors][:author_id]) 
+    @authors = Author.all
 
     respond_to do |format|
-      if @book.save && book_authors.save
+      if @book.save
+        author_ids = (params[:book_authors][:author_id]).compact
+        author_ids.each do |author_id|
+          @book.book_authors.create(author_id: author_id)
+        end
+
         format.html { redirect_to books_url, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else

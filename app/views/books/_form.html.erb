@@ -23,8 +23,8 @@
   </div>
   <div class="field">
     <%= form.label :author %>
-    <%# = form.select :author_id, @authors %>
-    <%= select("book_authors", "author_id", @authors) %>
+    <%# = collection_select("book_authors", "author_id", @authors, :id, :name_with_initial, multiple: true) %>
+    <%= collection_select "book_authors", "author_id", @authors, :id, :name_with_initial, { selected: [1]}, { multiple: true, class: "form-control" } %>
   </div>
   <div class="field">
     <%= form.label :price %>
