@@ -42,7 +42,7 @@ RSpec.describe Book, type: :model do
     end
 
     context "when isbn input is invalid" do
-      invalid_isbn = [""],["asda1"],["123456790"],["082047267-X"],["0112112425"],["082047267"],["9887401392"],["074324382"]
+      invalid_isbn = [""],["asda1"],["082047267-X"],["0112112425"],["9887401392"]
 
       invalid_isbn.each do |isbn|
         it "this #{isbn} is invalid" do
@@ -52,6 +52,21 @@ RSpec.describe Book, type: :model do
             publisher: publisher,
             isbn: isbn
           )}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Isbn Please provide correct ISBN")
+        end
+      end
+    end
+
+    context "when isbn input is invalid - testing GEM" do
+      invalid_isbn = ["123456790"],["082047267"],["074324382"]
+
+      invalid_isbn.each do |isbn|
+        it "this #{isbn} is invalid" do
+          publisher = create(:publisher)
+          expect {create(
+            :invalid_isbn,
+            publisher: publisher,
+            isbn: isbn
+          )}.to raise_error(ISBN::Invalid13DigitISBN, "ISBN::Invalid13DigitISBN")
         end
       end
     end
