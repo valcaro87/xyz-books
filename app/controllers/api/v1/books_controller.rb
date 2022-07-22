@@ -1,4 +1,7 @@
+include BooksHelper
+
 class Api::V1::BooksController < Api::V1::ApiController
+
   before_action :check_isbn, :set_book, only: %i[ show ]
 
   def index
@@ -10,20 +13,26 @@ class Api::V1::BooksController < Api::V1::ApiController
     render json: @book, status: 200
   end
 
-
   private
 
   def check_isbn
-    isbn = (params[:id])&.gsub("/[^0-9a-z ]/i", '')
-    if !(ISBN.valid?(isbn))
-      render json: { errors: "invalid ISBN" }, status: 400
+    @isbn = (params[:id]).scan(/[\da-z\s]/i).join
+    if !(ISBN.valid?(@isbn))
+      render json: { errors: "INVALID ISBN" }, status: 400
     end
   end
 
   def set_book
-    @book = Book.find_by_isbn(params[:id])
+    # try to find either 10 or 13 or convert vice-versa
+    isbn13 = isbn10_13(@isbn)
+    isbn10 = isbn13_10(@isbn)
+    @book = Book.where(isbn: [isbn10,isbn13,@isbn]).first
+
+    if @book
+      @book
+    else
+      render json: { errors: "BOOK NOT EXIST" }, status: 404
+    end
   end
-
-
 
 end

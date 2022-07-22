@@ -16,7 +16,7 @@ class Author < ApplicationRecord
   validates :first_name, presence: true, length: {minimum: 2}
   validates :last_name, presence: true, allow_blank: false
 
-  def name_with_initial
+  def complete_names
     "#{first_name} #{last_name}"
   end
 

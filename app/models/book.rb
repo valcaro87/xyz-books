@@ -22,9 +22,9 @@ class Book < ApplicationRecord
   validates :year_publication, presence: true, allow_blank: false
   validates :image_url, presence: true, allow_blank: false
   validates :edition, presence: true, numericality: { only_integer: true}
-  validate :valid_isbn_10
+  validate :valid_isbn
 
-  def valid_isbn_10
+  def valid_isbn
     result = []
     isbn = self.isbn
     isbn13  = isbn

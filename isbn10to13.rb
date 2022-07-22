@@ -16,6 +16,13 @@ def isbn10_13(isbn)
     end
     sub_number = 10 - (sum % 10)
     result = "#{result}#{sub_number}"
+    if result.length == 13
+      result
+    else
+      "INVALID ISBN"
+    end
+  else
+    "INVALID ISBN"
   end
 end
 

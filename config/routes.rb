@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   resources :books
   resources :authors
 
+  get 'search' => 'books#search'
+
   namespace :api do
     namespace :v1, defaults: {format: :json} do
 
       resources :books do
         collection do
-          get 'search' => 'books#search'
+          # get 'search' => 'books#search'
         end
       end
     end
