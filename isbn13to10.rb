@@ -13,30 +13,33 @@ def isbn13_10(isbn)
       break if (sum+last_num) % 11 == 0
       last_num += 1
     end
-    p last_num
+
     result = "#{isbn.join("")}#{last_num}"
-    p result
 
     if result.length > 10
       if (result.slice(-2..-1).to_i == 10)
         "#{result.slice(0..8)}X"
       else
-        "invalid ISBN"
+        "INVALID ISBN"
       end
     else
       result
     end
-
+  else
+    "INVALID ISBN"
   end
 end
 
-p isbn13_10("9781234567890")
+# p isbn13_10("9781234567890")
+# p isbn13_10("9780074625422") # 13 to (10 with X)
 # p isbn13_10("978-1612962559")
 # p isbn13_10("9780345391803")
 # p isbn13_10("9780000000002")
 # p isbn13_10("9780201882957")
-# p isbn13_10("9781420951301")
-# p isbn13_10("9780452284234")
-# p isbn13_10("9781292101767")
-p isbn13_10("9781234567897")
-p isbn13_10("9780074625422") # 13 to (10 with X)
+# p isbn13_10("9781234567897")
+
+p isbn13_10("9781420951301")
+p isbn13_10("9780452284234")
+p isbn13_10("9781292101767")
+
+

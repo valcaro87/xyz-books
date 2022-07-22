@@ -1,4 +1,6 @@
 require 'rails_helper'
+require "minitest/spec"
+include BooksHelper
 
 RSpec.describe Book, type: :model do
   let(:publisher) { FactoryBot.create(:publisher) }
@@ -68,6 +70,22 @@ RSpec.describe Book, type: :model do
             isbn: isbn
           )}.to raise_error(ISBN::Invalid13DigitISBN, "ISBN::Invalid13DigitISBN")
         end
+      end
+    end
+
+    context "when isbn input is invalid - testing GEM" do
+      it "convert 10 to 13" do
+        expect(isbn10_13("1250805767")).to eq("9781250805768")
+        expect(isbn10_13("007462542X")).to eq("9780074625422")
+        expect(isbn10_13("3-540-49698-X")).to eq("9783540496984")
+      end
+
+      it "convert 13 to 10" do
+        expect(isbn13_10("9781420951301")).to eq("1420951300")
+        expect(isbn13_10("9780452284234")).to eq("0452284236")
+        expect(isbn13_10("9781292101767")).to eq("1292101768")
+        expect(isbn13_10("9780074625422")).to eq("007462542X")
+        expect(isbn13_10("978-0986098161")).to eq("0986098167")
       end
     end
   end
