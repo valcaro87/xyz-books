@@ -16,8 +16,12 @@ class BooksController < ApplicationController
     else
       isbn13 = isbn10_13(@isbn)
       isbn10 = isbn13_10(@isbn)
-      @book = Book.where(isbn: [isbn10,isbn13,@isbn]).first
-      @authors = (Author.where(id: @book.book_authors.pluck(:author_id)).complete_name).join(", ")
+      @book = Book.where(isbn: [isbn10,isbn13,@isbn])&.first
+      if @book
+        @authors = (Author.where(id: @book.book_authors.pluck(:author_id)).complete_name).join(", ")
+      else
+        @errors << "Book not found"
+      end
     end
 
   end
