@@ -1,25 +1,22 @@
-# README
+# INSTRUCTIONS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* open terminal, clone repo: *git clone https://github.com/valcaro87/xyz-books.git
 
-Things you may want to cover:
+* change directory: *cd xyz-books
+* delete file: *Gemfile.lock*, then run: *bundle install*
 
-* Ruby version
+* open file '*database.yml*' - edit/change username and password, based from your local machine
+  * make sure or grant the user to access all privileges and permissions on the database(postgreSql)
 
-* System dependencies
+* run: *rails db:setup*
+* run: *rails db:migrate*
+* run: *rails s*
 
-* Configuration
+## Endpoints:
+Test using Postman API Platform
 
-* Database creation
+GET: search ISBN 
+url: {host}/api/v1/books/isbn
 
-* Database initialization
+example: localhost:3000/api/v1/books/9781466396715
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# xyz-books
