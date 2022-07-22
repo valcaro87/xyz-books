@@ -78,6 +78,9 @@ RSpec.describe Book, type: :model do
         expect(isbn10_13("1250805767")).to eq("9781250805768")
         expect(isbn10_13("007462542X")).to eq("9780074625422")
         expect(isbn10_13("3-540-49698-X")).to eq("9783540496984")
+        expect(isbn10_13("0986098167")).to eq("9780986098161")
+        expect(isbn10_13("0648313506")).to eq("9780648313502")
+        expect(isbn10_13("198692291X")).to eq("9781986922913")
       end
 
       it "convert 13 to 10" do
@@ -86,6 +89,7 @@ RSpec.describe Book, type: :model do
         expect(isbn13_10("9781292101767")).to eq("1292101768")
         expect(isbn13_10("9780074625422")).to eq("007462542X")
         expect(isbn13_10("978-0986098161")).to eq("0986098167")
+        expect(isbn13_10("9781700188557")).to eq("1700188550")
       end
     end
   end
