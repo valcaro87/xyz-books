@@ -15,8 +15,10 @@
 ## Endpoints:
 Test using Postman API Platform
 
-GET: search ISBN 
-url: {host}/api/v1/books/isbn
+GET: search ISBN (id = isbn)
+url: {host}/api/v1/books/{id}
 
-example: localhost:3000/api/v1/books/9781466396715
+examples: 
+* https://xyz-books-isbn.herokuapp.com/api/v1/books/1643650068
+* localhost:3000/api/v1/books/9781466396715
 
