@@ -44,6 +44,9 @@ examples:
 #### CRUD Books: 
 * https://xyz-books-isbn.herokuapp.com
 
+#### Gem 'isbn'
+* An existing library was installed  for isbn10/13 validation: https://github.com/tkersey/isbn
+
 ### Instructions:
 
 * open terminal, clone repo: *git clone https://github.com/valcaro87/xyz-books.git
